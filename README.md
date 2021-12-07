@@ -1,3 +1,2 @@
 # JavaScript-Vezbe
----
-Dot Cathcer
+Dot Cathcer: Work in progress
