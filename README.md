@@ -1,2 +1,2 @@
 # JavaScript_Vezbe
-Dot Cathcer: Work in progress
+Dot Catcher: Work in progress
