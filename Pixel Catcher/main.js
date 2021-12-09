@@ -61,3 +61,7 @@ window.onkeydown = function(event) {
         MoveRight();
     }
 }
+
+function redPixel(){
+    
+}
