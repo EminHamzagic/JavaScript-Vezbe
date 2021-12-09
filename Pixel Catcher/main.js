@@ -1,19 +1,40 @@
 var playground = document.getElementById('playground');
 
-var cols = 20;
-var rows = 10;
+var cols = 50;
+var rows = 25;
+var score = document.getElementById('score');
+var score_counter = 0;
+var time = document.getElementById('time');
 
-for(i = 0; i < cols * rows; i++){
-    playground.innerHTML += '<div class = "field "><div>\n';
+
+for(let i = 0; i < cols * rows; i++){
+    var field_element = document.createElement('div');
+    field_element.classList.add('field');
+    playground.appendChild(field_element);
 }
 
 var fields = document.getElementsByClassName('field');
 
-fields[fields.length - 1].classList.add('player');
+var player_position = cols * rows - (cols * rows / 2);
 
-var player_position = cols * rows - 1;
+fields[player_position].classList.add('player');
 
 // fields_arr = Array.from(fields);
+
+var red_position;
+
+function redPixel(){
+    while(true){
+        red_position = Math.floor(Math.random() * ((cols * rows - 1) - 1) + 1)
+        if(red_position === player_position){
+            continue;
+        }
+        fields[red_position].classList.add('red_pixel');
+        break
+    }
+}
+
+redPixel();
 
 function MoveUp(){
     if (player_position > cols - 1){
@@ -60,8 +81,10 @@ window.onkeydown = function(event) {
     else if(event.keyCode == 68){
         MoveRight();
     }
-}
-
-function redPixel(){
-    
+    if(red_position === player_position){
+        fields[red_position].classList.remove('red_pixel');
+        redPixel();
+        score_counter++;
+        score.innerText = score_counter;
+    }
 }
