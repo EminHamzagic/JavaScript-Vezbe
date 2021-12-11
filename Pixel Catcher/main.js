@@ -2,10 +2,11 @@ var playground = document.getElementById('playground');
 
 var cols = 50;
 var rows = 25;
+var time_mins = 0;
+var time_secs = 30;
+
 var score = document.getElementById('score');
 var score_counter = 0;
-var time_mins = 0;
-var time_secs = 10;
 var time = document.getElementById('time');
 time.innerText = time_mins + ':' + time_secs;
 var game_active = true;
@@ -22,7 +23,7 @@ var player_position = cols * rows - (cols * rows / 2);
 
 fields[player_position].classList.add('player');
 
-var time_func = setInterval(function() {
+var time_func = function (){
     if (time_mins > 0 || time_secs > 0){
         if (time_secs == 0){
             time_mins -= 1;
@@ -33,12 +34,12 @@ var time_func = setInterval(function() {
         console.log('nice');
     }
     else{
-        clearInterval(time_func)
-        document.getElementById('replay').style.display = 'block';
+        document.getElementById('replay').style.display = 'flex';
         game_active = false
     }
-}, 1000);
+}
 
+var Timer = setInterval(time_func, 1000);
 
 var red_position;
 
@@ -109,3 +110,15 @@ window.onkeydown = function(event) {
         }
     }
 }
+
+document.getElementById('replay_btn').addEventListener('click', () => {
+    game_active = true;
+    time_mins = 0;
+    time_secs = 30;
+    time.innerText = time_mins + ':' + time_secs;
+    score.innerText = 0;
+    score_counter = 0;
+    document.getElementById('replay').style.display = 'none';
+    clearInterval(Timer);
+    Timer = setInterval(time_func, 1000);
+})

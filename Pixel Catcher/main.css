@@ -19,6 +19,35 @@ body{
     background-color: rgba(0, 0, 0, 0.842);
     position: absolute;
     display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#replay button{
+    width: 100px;
+    height: 100px;
+    color: white;
+    font-size: 40px;
+    background-color: transparent;
+    border: 1px solid white;
+}
+
+#replay button:active{
+    background-color: rgba(255, 255, 255, 0.644);
+    border: 1px solid black;
+    color: black;
+}
+
+#replay button:hover{
+    background-color: rgba(255, 255, 255, 0.644);
+    border: 1px solid black;
+    color: black;
+}
+
+#replay h1{
+    font-size: 50px;
+    color: white;
 }
 
 .playground{
@@ -47,10 +76,8 @@ body{
 }
 
 .playground div{
-    /* border: 1px solid black; */
     width: 100%;
     height: 100%;
-
 }
 
 .red_pixel{
