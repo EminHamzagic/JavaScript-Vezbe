@@ -4,8 +4,11 @@ var cols = 50;
 var rows = 25;
 var score = document.getElementById('score');
 var score_counter = 0;
+var time_mins = 0;
+var time_secs = 10;
 var time = document.getElementById('time');
-
+time.innerText = time_mins + ':' + time_secs;
+var game_active = true;
 
 for(let i = 0; i < cols * rows; i++){
     var field_element = document.createElement('div');
@@ -19,7 +22,23 @@ var player_position = cols * rows - (cols * rows / 2);
 
 fields[player_position].classList.add('player');
 
-// fields_arr = Array.from(fields);
+var time_func = setInterval(function() {
+    if (time_mins > 0 || time_secs > 0){
+        if (time_secs == 0){
+            time_mins -= 1;
+            time_secs = 60;
+        }
+        time_secs -= 1;
+        time.innerText = time_mins + ':' + time_secs;
+        console.log('nice');
+    }
+    else{
+        clearInterval(time_func)
+        document.getElementById('replay').style.display = 'block';
+        game_active = false
+    }
+}, 1000);
+
 
 var red_position;
 
@@ -69,22 +88,24 @@ function MoveRight(){
 }
 
 window.onkeydown = function(event) {
-    if (event.keyCode == 87) {
-       MoveUp();
-    }
-    else if (event.keyCode == 83){
-        MoveDown();
-    }
-    else if(event.keyCode == 65){
-        MoveLeft();
-    }
-    else if(event.keyCode == 68){
-        MoveRight();
-    }
-    if(red_position === player_position){
-        fields[red_position].classList.remove('red_pixel');
-        redPixel();
-        score_counter++;
-        score.innerText = score_counter;
+    if (game_active){
+        if (event.keyCode == 87) {
+           MoveUp();
+        }
+        else if (event.keyCode == 83){
+            MoveDown();
+        }
+        else if(event.keyCode == 65){
+            MoveLeft();
+        }
+        else if(event.keyCode == 68){
+            MoveRight();
+        }
+        if(red_position === player_position){
+            fields[red_position].classList.remove('red_pixel');
+            redPixel();
+            score_counter++;
+            score.innerText = score_counter;
+        }
     }
 }
