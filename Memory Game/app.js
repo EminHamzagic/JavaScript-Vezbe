@@ -121,11 +121,5 @@ function time_func(){
 var Timer = setInterval(time_func, 1000)
 
 document.getElementById('replayBtn').addEventListener('click', () => {
-    // game_active = true;
-    // time_secs = 30;
-    // timerTxt.innerText = time_secs;
-    // document.getElementById('replay').style.display = 'none';
-    // clearInterval(Timer);
-    // Timer = setInterval(time_func, 1000);
     window.location.reload(true);
 })
